@@ -16,8 +16,8 @@
     "url": "https://github.com/wanglei158/search/issues"
   },
   "engines": {
-      "node": "0.10.x",
-      "npm": "1.2.x"
+      "node": "12.19.x",
+      "npm": "6.14.x"
   },
   "homepage": "https://github.com/wanglei158/search#readme"
 }
