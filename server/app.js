@@ -40,4 +40,8 @@ app.get('/search', async (req, res) => {
     res.json(resAr)
 })
 
+app.get('/', (req, res) => {
+    res.end('hello world')
+})
+
 app.listen(3001)
