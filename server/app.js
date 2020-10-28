@@ -44,4 +44,4 @@ app.get('/', (req, res) => {
     res.end('hello world')
 })
 
-app.listen(3001)
+app.listen(process.env.PORT || 3001)
