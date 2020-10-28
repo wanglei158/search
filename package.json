@@ -4,6 +4,7 @@
   "description": "search some book # 服务端  > 采用express 框架， 安装插件cors 允许跨域请求， 方便前后端分离开发 安装mongoose mongodb 链接数据库",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
