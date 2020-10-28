@@ -1,0 +1,23 @@
+{
+  "name": "heroku",
+  "version": "1.0.0",
+  "description": "search some book # 服务端  > 采用express 框架， 安装插件cors 允许跨域请求， 方便前后端分离开发 安装mongoose mongodb 链接数据库",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wanglei158/search.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wanglei158/search/issues"
+  },
+  "engines": {
+      "node": "0.10.x",
+      "npm": "1.2.x"
+  },
+  "homepage": "https://github.com/wanglei158/search#readme"
+}
