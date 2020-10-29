@@ -12,6 +12,9 @@ app.use(cors({
     methods: '*'
 }))
 
+
+app.use(express.static(__dirname + '/public'));
+
 app.get('/search', async (req, res) => {
     const query = req.query;
     let resp = [];

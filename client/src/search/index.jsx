@@ -91,7 +91,7 @@ export default class Search extends Component {
         const params = Object.assign(this.parseDate, rest)
         let parseParams = this.concatParams(params)
 
-        fetch('http://127.0.0.1:3000/search?' + parseParams).then(r => {
+        fetch('/search?' + parseParams).then(r => {
             return r.json()
         }).then(res => {
             this.setState({
