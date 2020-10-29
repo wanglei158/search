@@ -8,34 +8,51 @@ import reportWebVitals from './reportWebVitals';
 import { i18n } from 'element-react'
 import locale from 'element-react/src/locale/lang/en'
 
-import { Router, Route } from 'react-router';
+import { Router, Route, BrowserRouter, Link, Switch } from 'react-router-dom';
 
-import { createBrowserHistory } from 'history'
+import { createHashHistory } from 'history'
 
 i18n.use(locale);
 
-function Menu() {
-  return (<div style={{ 'textAlign': 'center', display: "flex", justifyContent: 'space-around' }}>
-    <a href="/list">list</a>
-
-    <a href="/add">add</a>
-
-    <a href="/his">search history</a>
-  </div>)
+class Menu extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      curindex: 1
+    }
+  }
+  getswitch(num) {
+    this.setState({
+      curindex: num
+    })
+    console.log(num)
+  }
+  render() {
+    const index = this.state.curindex;
+    let content = null;
+    if (index === 1) {
+      content = <App />
+    }
+    if (index === 2) {
+      content = <Add />
+    }
+    if (index === 3) {
+      content = <His />
+    }
+    return (<div>
+      <span style={{ cursor: "pointer", marginLeft: '24px', color: "blue" }} onClick={this.getswitch.bind(this, 1)}>list</span>
+      <span style={{ cursor: "pointer", marginLeft: '24px', color: "blue" }} onClick={this.getswitch.bind(this, 2)}>add</span>
+      <span style={{ cursor: "pointer", marginLeft: '24px', color: "blue" }} onClick={this.getswitch.bind(this, 3)}>search hostory</span>
+      {
+        content
+      }
+    </div>)
+  }
 }
 
 
-ReactDOM.render((
-  <div>
-    <Router history={createBrowserHistory()}>
-      <Menu />
-      <Route path="/list" component={App}></Route>
-      <Route path="/add" component={Add}></Route>
-      <Route path="/his" component={His}></Route>
-
-    </Router>
-  </div>
-),
+ReactDOM.render(
+  <Menu />,
   document.getElementById('root')
 );
 

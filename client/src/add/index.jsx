@@ -47,7 +47,7 @@ export default class Add extends Component {
         const params = Object.assign(this.parseDate, rest)
         let parseParams = this.concatParams(params)
 
-        fetch('http://127.0.0.1:5000/add?' + parseParams).then(r => {
+        fetch('/add?' + parseParams).then(r => {
             return r.json()
         }).then(res => {
             if (res.code === 1) {
