@@ -1,9 +1,8 @@
 import { Component } from 'react'
-import { Form, Input, Layout, DatePicker, Table, Button } from 'element-react'
-import './index.css'
+import { Form, Input, Layout, DatePicker, Button } from 'element-react'
 import {filterEmpty} from '../utils'
 
-export default class Search extends Component {
+export default class Add extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -15,50 +14,7 @@ export default class Search extends Component {
                 journal: '',
                 number: '',
                 volume: ''
-            },
-            list: [],
-            columns: [
-                {
-                    label: 'author',
-                    prop: 'author',
-                    align: 'center'
-                },
-                {
-                    label: 'title',
-                    align: 'center',
-                    prop: 'title'
-                },
-                {
-                    label: 'journal',
-                    align: 'center',
-                    prop: 'journal'
-                },
-                {
-                    label: 'volume',
-                    align: 'center',
-                    prop: 'volume'
-                },
-                {
-                    label: 'number',
-                    align: 'center',
-                    prop: 'number'
-                },
-                {
-                    label: 'pages',
-                    align: 'center',
-                    prop: 'pages'
-                },
-                {
-                    label: 'year',
-                    align: 'center',
-                    prop: 'year'
-                },
-                {
-                    label: 'month',
-                    align: 'center',
-                    prop: 'month'
-                }
-            ]
+            }
         }
     }
 
@@ -83,35 +39,33 @@ export default class Search extends Component {
     concatParams(obj) {
         const para = filterEmpty(obj)
         let paramsArray = []; 
-        let keys = Object.keys(para)
-        keys.forEach(key => paramsArray.push(key + '=' + para[key]))
-        if (keys.length > 0) {
-            const ls = JSON.parse(localStorage.getItem('his')) || []
-            ls.push(obj)
-            localStorage.setItem('his', JSON.stringify(ls));
-        }
+        Object.keys(para).forEach(key => paramsArray.push(key + '=' + para[key]))
         return paramsArray.join('&')
     }
-    getList() {
+    getAdd() {
         const { date, ...rest } = this.state.condition
         const params = Object.assign(this.parseDate, rest)
         let parseParams = this.concatParams(params)
 
-        fetch('http://127.0.0.1:5000/search?' + parseParams).then(r => {
+        fetch('http://127.0.0.1:5000/add?' + parseParams).then(r => {
             return r.json()
         }).then(res => {
-            this.setState({
-                list: res
-            })
+            if (res.code === 1) {
+                const { condition} = this.state
+                let temp = {};
+                Object.keys(condition).forEach(key => {
+                    temp[key] = ''
+                })
+                this.setState({
+                    condition: temp
+                })
+                alert('新增成功')
+            }
         })
     }
 
-    componentDidMount() {
-        this.getList()
-    }
-
     render() {
-        const { condition, list, columns } = this.state;
+        const { condition } = this.state;
         return (
             <div>
             <Form className="search" model={condition} labelWidth="80" onSubmit={this.onSubmit.bind(this)}>
@@ -159,14 +113,11 @@ export default class Search extends Component {
                     </Layout.Col>
                     <Layout.Col span="6">
                         <Form.Item label="">
-                            <Button type="primary" onClick={this.getList.bind(this)} icon="search">search</Button>
+                            <Button type="primary" onClick={this.getAdd.bind(this)} icon="upload">submit</Button>
                         </Form.Item>
                     </Layout.Col>
                 </Layout.Row>
                 </Form>
-                <Table emptyText={'Empty'} data={list} columns={columns} maxHeight={400}>
-
-                </Table>
             </div>
         )
     }

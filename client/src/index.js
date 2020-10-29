@@ -2,15 +2,40 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Add from './add/index.jsx'
+import His from './sreachHistory/index'
 import reportWebVitals from './reportWebVitals';
 import { i18n } from 'element-react'
 import locale from 'element-react/src/locale/lang/en'
 
+import { Router, Route } from 'react-router';
+
+import { createBrowserHistory } from 'history'
+
 i18n.use(locale);
 
+function Menu() {
+  return (<div style={{ 'textAlign': 'center', display: "flex", justifyContent: 'space-around' }}>
+    <a href="/list">list</a>
 
-ReactDOM.render(
-  <App />,
+    <a href="/add">add</a>
+
+    <a href="/his">search history</a>
+  </div>)
+}
+
+
+ReactDOM.render((
+  <div>
+    <Router history={createBrowserHistory()}>
+      <Menu />
+      <Route path="/list" component={App}></Route>
+      <Route path="/add" component={Add}></Route>
+      <Route path="/his" component={His}></Route>
+
+    </Router>
+  </div>
+),
   document.getElementById('root')
 );
 
