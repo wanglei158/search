@@ -56,7 +56,7 @@ export default class Add extends Component {
         const { columns } = this.state;
         return (
             <div>
-                <h3>搜索历史</h3>
+                <h3>search history</h3>
                 <Table emptyText={'Empty'} data={list} columns={columns} maxHeight={400}>
 
                 </Table>
